@@ -18,16 +18,16 @@ The power pins are as follows:
     Vin on the screw terminal block, is the input voltage to the motor connected to the shield. An external power supply connected to this pin also provide power to the Arduino board on which is mounted. By cutting the "Vin Connect" jumper you make this a dedicated power line for the motor.
 
 Motor wires:
-Red and white = rear motor
-Green and yellow = steering
+Blue and yellow = motor A
+Blue and yellow = motor B
 Black = aux power ground
 Red/Black = aux power +5v
 
 Ultrasonic sensor wires:
 Black = ground
 Red = 5v
-Green = Trigger
 Yellow = Echo
+Green = Trigger
 
 */
 
@@ -92,11 +92,11 @@ void loop(){
         Serial.println("Change of direction detected, pausing..");
         stop(5000);
         dirchange = false; //switch
-        reverseTurn(50);
+        reverseTurn(255);
         }
         else {
           Serial.println("No direction change, OK!");
-          reverseTurn(50);
+          reverseTurn(255);
           dirchange = false;
           }
  }
@@ -158,15 +158,15 @@ void reverseTurn(int speed)
 {
   //Turn while reversing right
   Serial.println("Reversing to the right");
-  //Motor B right
-  digitalWrite(13, HIGH); //Establishes right direction of Channel B
+  //Motor B reverse
+  digitalWrite(13, LOW); //Establishes reverse direction of Channel B
   digitalWrite(8, LOW);   //Disengage the Brake for Channel B
-  analogWrite(11, 254);   //Spins the motor on Channel B at full speed
+  analogWrite(11, speed);   //Spins the motor on Channel B at full speed
 
-  //Motor A Revere
-  digitalWrite(12, LOW);  //Establishes backward direction of Channel A
+  //Motor A Reverse
+  digitalWrite(12, LOW);  //Establishes forward direction of Channel A
   digitalWrite(9, LOW);   //Disengage the Brake for Channel A
-  analogWrite(3, speed);    //Spins the motor on Channel A at half speed
+  analogWrite(3, speed/2);    //Spins the motor on Channel A at half speed
 
   delay(2000); //do this for x seconds in order to clear obstacle
 }
@@ -180,7 +180,7 @@ void stop(int duration)  //Motor speed the variable
   analogWrite(11, 0);   //Spins the motor on Channel B at 0 speed
 
   //Move motor A forwards
-  digitalWrite(12, HIGH); //Establishes forward direction of Channel A
+  //digitalWrite(12, HIGH); //Establishes forward direction of Channel A
   digitalWrite(9, HIGH);   //Engage the Brake for Channel A
   analogWrite(3, 0);   //Spins the motor on Channel A at speed
   delay(duration);
