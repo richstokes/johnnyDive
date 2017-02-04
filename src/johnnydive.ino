@@ -1,4 +1,4 @@
-/*Automatically drive an RC car
+/*Automatically drive a tracked robot
 //Power research:
 //4V in, 2.5V out with 3x AAA powering motor shield
 //7.2v battery @ speed 110 (PWM) = 4.5v
@@ -42,7 +42,7 @@ boolean dirchange = false;
 
 void setup() {
   Serial.begin (9600);
-  Serial.println("Setting up the bomb...");
+  Serial.println("Setting up the robot...");
   //Setup Channel A
   pinMode(12, OUTPUT); //Initiates Motor Channel A pin
   pinMode(9, OUTPUT); //Initiates Brake Channel A pin
@@ -113,14 +113,13 @@ void tprint(String text) {
 
 void forwards(int speed)  //Motor speed the variable
 {
-  Serial.println("Moving forward");  //Motor A forward @ full speed
-  //Make sure motor B is not steering
-  //digitalWrite(13, HIGH); //Establishes right direction of Channel B
-  digitalWrite(8, HIGH);   //Engage the Brake for Channel B
-  analogWrite(11, 0);   //Spins the motor on Channel B at 0 speed
+  Serial.println("Moving forward");  //Motors forward @ full speed
+  digitalWrite(13, HIGH); //Establishes forward direction  of Channel B
+  digitalWrite(8, LOW);   //Disengage the Brake for Channel B
+  analogWrite(11, speed);   //Spins the motor on Channel B at 0 speed
 
   //Move motor A forwards
-  digitalWrite(12, HIGH); //Establishes forward direction of Channel A
+  digitalWrite(12, LOW); //Establishes forward direction of Channel A
   digitalWrite(9, LOW);   //Disengage the Brake for Channel A
   analogWrite(3, speed);   //Spins the motor on Channel A at speed
   delay(100);
@@ -129,9 +128,14 @@ void forwards(int speed)  //Motor speed the variable
 void reverse(int speed)
 {
   Serial.println("Reversing straight");
-  digitalWrite(12, LOW);  //Establishes backward direction of Channel A
+  digitalWrite(13, LOW); //Establishes reverse direction  of Channel B
+  digitalWrite(8, LOW);   //Disengage the Brake for Channel B
+  analogWrite(11, speed);   //Spins the motor on Channel B at 0 speed
+
+  //Move motor A forwards
+  digitalWrite(12, HIGH); //Establishes reverse direction of Channel A
   digitalWrite(9, LOW);   //Disengage the Brake for Channel A
-  analogWrite(3, speed);    //Spins the motor on Channel A at half speed
+  analogWrite(3, speed);   //Spins the motor on Channel A at speed
   delay(100);
 }
 
