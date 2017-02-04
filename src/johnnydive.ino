@@ -35,10 +35,10 @@ Green = Trigger
 #define trigPin 4 // Trigger Pin
 #define LEDPin 6 // Optional LED
 
-int maximumRange = 20; // Maximum range of object. i.e. how close should we get (max 255)
+int maximumRange = 30; // Maximum range of object. i.e. how close should we get (max 255)
 int minimumRange = 0; // Minimum range needed
 long duration, distance; // Duration used to calculate distance
-boolean dirchange = false;
+boolean dirchange = false; // Tracks if the robot has to make a direction change. Can be used to stop/brake motors before turning
 
 void setup() {
   Serial.begin (9600);
@@ -78,7 +78,8 @@ void loop(){
    Serial.println("-1");
    Serial.println("Looking clear!");
    digitalWrite(LEDPin, HIGH);
-   forwards(255);   //move forward
+   turnRight(255);
+   //forwards(255);   //move forward
    dirchange = true;
    }
 
@@ -90,7 +91,7 @@ void loop(){
 
       if (dirchange == true) {
         Serial.println("Change of direction detected, pausing..");
-        stop(5000);
+        stop(4000);
         dirchange = false; //switch
         reverseTurn(255);
         }
@@ -142,11 +143,15 @@ void reverse(int speed)
 void turnRight(int speed)
 {
   Serial.println("Turning right (forwards)");
-  //Motor B right
-  digitalWrite(13, HIGH); //Establishes right direction of Channel B
+  digitalWrite(13, HIGH); //Establishes forward direction  of Channel B
   digitalWrite(8, LOW);   //Disengage the Brake for Channel B
-  analogWrite(11, speed);   //Spins the motor on Channel B at full speed
-  Serial.println("Moving Motor B right...");
+  analogWrite(11, speed);   //Spins the motor on Channel B at 0 speed
+
+  //Move motor A forwards
+  digitalWrite(12, LOW); //Establishes forward direction of Channel A
+  digitalWrite(9, LOW);   //Disengage the Brake for Channel A
+  analogWrite(3, speed/1.6);   //Spins the motor on Channel A at slow speed to aid turning
+  delay(100);
 }
 
 void turnLeft(int speed)
@@ -166,7 +171,7 @@ void reverseTurn(int speed)
   //Motor A Reverse
   digitalWrite(12, LOW);  //Establishes forward direction of Channel A
   digitalWrite(9, LOW);   //Disengage the Brake for Channel A
-  analogWrite(3, speed/2);    //Spins the motor on Channel A at half speed
+  analogWrite(3, speed/1.5);    //Spins the motor on Channel A at ~half speed
 
   delay(2000); //do this for x seconds in order to clear obstacle
 }
