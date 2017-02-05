@@ -25,7 +25,7 @@ If you'd like to follow along at home, you'll want something similar to:
 - Arduino Uno R3
 - Arduino Motorshield R3
 - 9V battery (for powering Arduino)
-- 7.2V battery (for powering motorsheild)
+- 7.2V battery (for powering motorsheild, I used a RC car style 3000mAh Flat NiMH battery)
 - Tracked robot chassis (I am using the Sinoning SN2400)
 - 2x DC motors (I am using 33GB-520 12V 350RPM DC gear motor)
 - Ultrasonic sensor (HC-SR04)
@@ -35,7 +35,7 @@ If you'd like to follow along at home, you'll want something similar to:
 #Set up
 
 ##Power notes
-One important thing I learned, while the Motorshield can draw power direct from the Arduino, this will not provide enough current to successfully drive motors.
+One important thing I learned, while the Motorshield can share power with the Arduino, this will not provide enough current to successfully drive motors.
 
 The way around this is to cut the "VIN connect" jumper on the motorshield. Doing this lets you connect up a seperate power source to specifically drive the motors.
 
