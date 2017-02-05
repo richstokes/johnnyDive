@@ -34,6 +34,11 @@ If you'd like to follow along at home, you'll want something similar to:
 
 #Set up
 
+##Software
+src/ contains the file you can load into the Arduino IDE (or I prefer Platform.io) to get going.
+Everything in the code is commented in an attempt to explain whats going on.
+
+
 ##Power notes
 One important thing I learned, while the Motorshield can share power with the Arduino, this will not provide enough current to successfully drive motors.
 
