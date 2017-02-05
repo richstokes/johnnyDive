@@ -25,9 +25,9 @@ If you'd like to follow along at home, you'll want something similar to:
 - Arduino Uno R3
 - Arduino Motorshield R3
 - 9V battery (for powering Arduino)
-- 7.2V battery (for powering motorsheild, I used a RC car style 3000mAh Flat NiMH battery)
+- 7.2V battery (for powering motorshield, I used a RC car style 3000mAh Flat NiMH battery)
 - Tracked robot chassis (I am using the Sinoning SN2400)
-- 2x DC motors (I am using 33GB-520 12V 350RPM DC gear motor)
+- 2x DC motors (I am using 33GB-520 12V 350RPM DC gear motors)
 - Ultrasonic sensor (HC-SR04)
 - 2x LEDs (optional)
 
