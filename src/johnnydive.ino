@@ -31,12 +31,13 @@ Green = Trigger
 
 */
 
-#define echoPin 5 // Echo Pin
-#define trigPin 4 // Trigger Pin
-#define LEDPin 6 // Optional LED
+#define echoPin 5 // Ultrasonic Echo Pin
+#define trigPin 4 // Ultrasonic Trigger Pin
+#define greenLEDPin 6 // Green LED
+#define redLEDPin 7 // Red LED
 
 int maximumRange = 30; // Maximum range of object. i.e. how close should we get (max 255)
-int minimumRange = 0; // Minimum range needed
+int minimumRange = 0; // Minimum range
 long duration, distance; // Duration used to calculate distance
 boolean dirchange = false; // Tracks if the robot has to make a direction change. Can be used to stop/brake motors before turning
 
@@ -48,14 +49,15 @@ void setup() {
   pinMode(9, OUTPUT); //Initiates Brake Channel A pin
 
   //Setup Channel B
-  pinMode(13, OUTPUT); //Initiates Motor Channel A pin
-  pinMode(8, OUTPUT);  //Initiates Brake Channel A pin
+  pinMode(13, OUTPUT); //Initiates Motor Channel B pin
+  pinMode(8, OUTPUT);  //Initiates Brake Channel B pin
   Serial.println("Motors initalized...");
 
   //Setup distance sensor and LED
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
-  pinMode(LEDPin, OUTPUT); // Use LED indicator (if required)
+  pinMode(greenLEDPin, OUTPUT); // Use Green LED indicator (optional)
+  pinMode(redLEDPin, OUTPUT); //Use green LED indicator (optional)
 
 }
 
@@ -77,7 +79,9 @@ void loop(){
    if (distance >= maximumRange || distance <= minimumRange){
    Serial.println("-1");
    Serial.println("Looking clear!");
-   digitalWrite(LEDPin, HIGH);
+   digitalWrite(greenLEDPin, HIGH);
+
+   //default movement
    turnRight(255);
    //forwards(255);   //move forward
    dirchange = true;
@@ -87,7 +91,7 @@ void loop(){
 
    Serial.println(distance);    /* Send the distance */
    Serial.println("Something in the way, turning around!");
-   digitalWrite(LEDPin, LOW); // turn a LED
+   digitalWrite(greenLEDPin, LOW); // turn off green LED
 
       if (dirchange == true) {
         Serial.println("Change of direction detected, pausing..");
@@ -154,7 +158,7 @@ void turnRight(int speed)
   delay(100);
 }
 
-void turnLeft(int speed)
+void turnLeft(int speed) //WIP
 {
   Serial.println("Turning left (forwards)");
 }
@@ -163,6 +167,7 @@ void reverseTurn(int speed)
 {
   //Turn while reversing right
   Serial.println("Reversing to the right");
+  digitalWrite(redLEDPin, HIGH);
   //Motor B reverse
   digitalWrite(13, LOW); //Establishes reverse direction of Channel B
   digitalWrite(8, LOW);   //Disengage the Brake for Channel B
@@ -174,6 +179,7 @@ void reverseTurn(int speed)
   analogWrite(3, speed/1.5);    //Spins the motor on Channel A at ~half speed
 
   delay(2000); //do this for x seconds in order to clear obstacle
+  digitalWrite(redLEDPin, LOW);
 }
 
 void stop(int duration)  //Motor speed the variable
