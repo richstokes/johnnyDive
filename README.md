@@ -5,9 +5,9 @@ My first attempt at building a semi-decent robot using Arduino!
 
 The robot has the following spec/features:
 
-2x DC motors power the robot using a tank-style chassis
-1x Ultrasonic distance sensor mounted to a servo
-2x On-board status LED
+- 2x DC motors power the robot using a tank-style chassis
+- 1x Ultrasonic distance sensor mounted to a servo
+- 2x On-board status LED
 
 
 The robot uses the following guidelines to navigate:
