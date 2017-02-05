@@ -123,12 +123,12 @@ void loop(){
                  if (nextDirection == 1) {
                    Serial.println("We should go left next");
                    reverseTurnLeft(255);
-                   delay(3000); //increase for debugging
+                   //delay(3000); //increase for debugging
                  }
                  else {
                    Serial.println("We should go right next");
                    reverseTurnRight(255);
-                   delay(3000); //increase for debugging
+                   //delay(3000); //increase for debugging
                  }
                  Serial.println("");
                  stop(500);
@@ -228,7 +228,7 @@ void reverseTurnLeft(int speed) // Reverse robot at specified speed while rotati
   digitalWrite(9, LOW);   //Disengage the Brake for Channel A
   analogWrite(3, speed/1.5);    //Spins the motor on Channel A at ~half speed
 
-  delay(2000); //do this for x seconds in order to clear obstacle
+  delay(1000); //do this for x seconds in order to clear obstacle
   digitalWrite(redLEDPin, LOW);
 }
 
@@ -248,7 +248,7 @@ void reverseTurnRight(int speed) // Reverse robot at specified speed while rotat
   digitalWrite(9, LOW);   //Disengage the Brake for Channel A
   analogWrite(3, speed/1.5);    //Spins the motor on Channel A at ~half speed
 
-  delay(2000); //do this for x seconds in order to clear obstacle
+  delay(1000); //do this for x seconds in order to clear obstacle
   digitalWrite(redLEDPin, LOW);
 }
 
