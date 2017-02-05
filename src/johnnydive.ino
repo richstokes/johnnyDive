@@ -33,8 +33,8 @@ Green = Trigger
 
 #define echoPin 5 // Ultrasonic Echo Pin
 #define trigPin 4 // Ultrasonic Trigger Pin
-#define greenLEDPin 6 // Green LED
-#define redLEDPin 7 // Red LED
+#define greenLEDPin 6 // Green LED (Optional)
+#define redLEDPin 7 // Red LED (Optional )
 
 int maximumRange = 30; // Maximum range of object. i.e. how close should we get (max 255)
 int minimumRange = 0; // Minimum range
