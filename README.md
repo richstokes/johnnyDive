@@ -9,7 +9,7 @@ The robot has the following spec/features:
 - 1x Ultrasonic distance sensor mounted to a servo
 - 2x On-board status LED
 
-9
+
 The robot uses the following guidelines to navigate:
 
 1. Where possible, always move forward

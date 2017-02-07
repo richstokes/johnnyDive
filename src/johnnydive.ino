@@ -105,7 +105,6 @@ void loop(){
    distance = duration/58.2;    //Calculate the distance (in cm) based on the speed of sound.
 
    if (distance >= maximumRange || distance <= minimumRange){
-   Serial.println("-1");
    Serial.println("Looking clear!");
    digitalWrite(greenLEDPin, HIGH);
 
